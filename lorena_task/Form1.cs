@@ -10,79 +10,84 @@ using System.Windows.Forms;
 using System.Data.SQLite;
 using System.Collections;
 using static System.Net.Mime.MediaTypeNames;
+using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace lorena_task
 {
     public partial class Form1 : Form
     {
+        private SQLiteConnection connection;
         public Form1()
         {
-            InitializeComponent();
+            have_read_Nodes = new List<DB_Node>();
             InitializeBD();
+            InitializeComponent();
+            InitTreeView();
         }
-        private void InitializeBD() {
 
-            //###########################################################################################
-            //1 - ПОДГОТОВКА ДАННЫХ ДЛЯ ВСТАВКИ ПО УМОЛЧАНИЮ
-            List<DB_Node> dB_Nodes = new List<DB_Node>();
-            dB_Nodes.Add(   new DB_Node( 1, "Миасс",  4,  false, 0, "Это описание  Миасскаого подразделения") );
-            dB_Nodes.Add(   new DB_Node( 2, "Амелия", 5,  true,  1, "Это описание  подразделения Амелия"));
-            dB_Nodes.Add(   new DB_Node( 3, "Тест1",  2,  true,  2, "Это описание  подразделения Тест1"));
-            dB_Nodes.Add(   new DB_Node( 4, "Тест2",  0,  true,  1, "Это описание  подразделения Тест2"));
-            dB_Nodes.Add(   new DB_Node( 5, "Курган", 11, false, 0, "Это описание  подразделения Курган"));
-            //###########################################################################################
-            // 2 -  УСТАНОВЛЕНИЕ СОЕДИНЕНИЯ С БД
-            string dbPath = "lorena_data.db";//путь к базе данных в папке с проектом
-            
-            //3 - СОЗДАНИЕ И ОТКРЫТИЕ БД
-            using (SQLiteConnection connection = new SQLiteConnection($"Data Source = {dbPath};Version = 3")){
+        private decimal CalculateResult(decimal price, decimal discount, decimal discount_parent) {
+            return price - (price * ((discount + discount_parent) / 100));
+        }
 
-                connection.Open();
-             
-                //3 СОЗДАНИЕ ТАБЛИЦЫ
-                using (SQLiteCommand command = new SQLiteCommand(
-                    "CREATE TABLE IF NOT EXISTS DillerTree(" +
-                        "Id             INTEGER PRIMARY KEY NOT NULL UNIQUE," +
-                        "Name           TEXT NOT NULL," +
-                        "Discount       REAL NOT NULL," +
-                        "Dependence     INTEGER NOT NULL," +
-                        "Parent_id      INTEGER NOT NULL," +
-                        "Discription    TEXT NOT NULL  ," +
-                        "FOREIGN KEY(Parent_id) REFERENCES DillerTree(Id) )" ,
-                        connection)) {
-
-                    command.ExecuteNonQuery();
-                }
-                //4 -  ДОБАВЛЕНИЕ НАЧАЛЬНЫХ ДАННЫХ В ТАБЛИЦУ
-                foreach (DB_Node el in dB_Nodes) {
-                    using (SQLiteCommand insertCommand = new SQLiteCommand("INSERT INTO DillerTree(Id,Name,Discount,Dependence,Parent_id,Discription) VALUES (@Id, @Name, @Discount, @Dependence , @Parent_id,  @Discription)", connection)) {
-
-                        insertCommand.Parameters.AddWithValue("@Id",         el.Id);
-                        insertCommand.Parameters.AddWithValue("@Name",       el.Name);
-                        insertCommand.Parameters.AddWithValue("@Discount",   el.Discount);
-                        insertCommand.Parameters.AddWithValue("@Dependence", el.Dependence);
-                        insertCommand.Parameters.AddWithValue("@Parent_id",  el.Parent_id);
-                        insertCommand.Parameters.AddWithValue("@Discription",el.Discription);
-                        insertCommand.ExecuteNonQuery();
-                    } 
-                }
-
+        private decimal CalculateDiscountPatent(DB_Node node) {
+            //рекурсивный метод расчета скидки предков с учетом всех предков в дереве вплоть до корня
+            decimal sum_discount_parent = 0;
+            if (node.Dependence) {
+                foreach (DB_Node el in have_read_Nodes)
+                    if (node.Parent_id == el.Id){
+                        sum_discount_parent += el.Discount;
+                        return CalculateDiscountPatent(el) + sum_discount_parent;
+                    }
+                return sum_discount_parent;
             }
-            //###########################################################################################
+            return 0;
         }
 
+        private void button1_MouseClick(object sender, MouseEventArgs e)
+        {
+            decimal price = Convert.ToDecimal(textBox1.Text);
+            //выделяем подстроку с именем салона
+            string diller_name = Convert.ToString(Regex.Match(treeView1.SelectedNode.Text, @"^([\w\-]+)"));
+
+            DB_Node node = new DB_Node();
+
+            //ищем элемент среди считанных из БД по выделенной подстроке
+            foreach (DB_Node el in have_read_Nodes)
+                if (el.Name == diller_name)
+                    node = el;
+            //расчитываем скидку предка
+            decimal discount_parent = CalculateDiscountPatent(node);
+
+            //расчитываем итоговую стоимость
+            decimal result = CalculateResult(price, node.Discount, discount_parent);
+            //добавляем элемент в таблицу истории
+            this.dataGridView2.Rows.Add(diller_name, price, node.Discount, discount_parent, result);
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
+            this.dataGridView1.Rows.Clear();
+
+            //выделяем подстроку с именем салона
+            string diller_name = Convert.ToString(Regex.Match(treeView1.SelectedNode.Text, @"^([\w\-]+)"));
+
+            DB_Node node = new DB_Node();
+
+            //ищем элемент среди считанных из БД по выделенной подстроке
+            foreach (DB_Node el in have_read_Nodes)
+                if (el.Name == diller_name)
+                    node = el;
+
+            Func<bool, string> dep = (d) => { return d ? "Есть" : "Нет"; };
+
+            this.dataGridView1.Rows.Add(node.Name, node.Discount, dep(node.Dependence) , node.Discription);
+        }
     }
 }
-
-
-//5 чтение данных из таблицы
-//using (SQLiteCommand selectCommand = new SQLiteCommand("SELECT * FROM Nodes", connection))
-//{
-
-//    using (SQLiteDataReader reader = selectCommand.ExecuteReader())
-//    {
-//        while (reader.Read())
-//        {
-//            Console.WriteLine($"   Id:{reader["Id"]} , Name:{reader["Name"]},  Value:{reader["Value"]}");
-//        }
-//    }

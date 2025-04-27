@@ -15,7 +15,8 @@ namespace lorena_task
                 this.Discount = Discount;
                 this.Dependence = Dependence;
                 this.Parent_id = Parent_id;
-                this.Discription = Discription;    
+                this.Discription = Discription;
+                childs = new List<DB_Node>();
         }
         public int Id;
         public string Name;
@@ -23,5 +24,7 @@ namespace lorena_task
         public bool Dependence;
         public int Parent_id;
         public string Discription;
+        public List<DB_Node> childs;
     }
+
 }
