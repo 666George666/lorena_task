@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Timers;
 using System.Windows.Forms;
+using System.IO;
 
 namespace lorena_task
 {
@@ -177,6 +178,7 @@ namespace lorena_task
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(248, 29);
             this.textBox1.TabIndex = 4;
+            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // button1
             // 
@@ -239,37 +241,41 @@ namespace lorena_task
             // 2 -  УСТАНОВЛЕНИЕ СОЕДИНЕНИЯ С БД
             string dbPath = "lorena_data.db";//путь к базе данных в папке с проектом
 
-            //3 - СОЗДАНИЕ И ОТКРЫТИЕ БД
-            using (connection = new SQLiteConnection($"Data Source = {dbPath};Version = 3"))
-            {
-                connection.Open();
-                //3 СОЗДАНИЕ ТАБЛИЦЫ
-                using (SQLiteCommand command = new SQLiteCommand(
-                    "CREATE TABLE IF NOT EXISTS DillerTree(" +
-                        "Id             INTEGER PRIMARY KEY NOT NULL UNIQUE," +
-                        "Name           TEXT NOT NULL," +
-                        "Discount       REAL NOT NULL," +
-                        "Dependence     INTEGER NOT NULL," +
-                        "Parent_id      INTEGER NOT NULL," +
-                        "Discription    TEXT(124) NOT NULL  ," +
-                        "FOREIGN KEY(Parent_id) REFERENCES DillerTree(Id) )",
-                        connection))
+            if( !File.Exists(dbPath)) {
+
+                //3 - СОЗДАНИЕ И ОТКРЫТИЕ БД
+                using (connection = new SQLiteConnection($"Data Source = {dbPath};Version = 3"))
                 {
-                    command.ExecuteNonQuery();
-                }
-                //4 -  ДОБАВЛЕНИЕ НАЧАЛЬНЫХ ДАННЫХ В ТАБЛИЦУ
-                foreach (DB_Node el in dB_Nodes)
-                {
-                    using (SQLiteCommand insertCommand = new SQLiteCommand("INSERT INTO DillerTree(Id,Name,Discount,Dependence,Parent_id,Discription) VALUES (@Id, @Name, @Discount, @Dependence , @Parent_id,  @Discription)", connection))
+                    connection.Open();
+                    //3 СОЗДАНИЕ ТАБЛИЦЫ
+                    using (SQLiteCommand command = new SQLiteCommand(
+                        "CREATE TABLE IF NOT EXISTS DillerTree(" +
+                            "Id             INTEGER PRIMARY KEY NOT NULL UNIQUE," +
+                            "Name           TEXT NOT NULL," +
+                            "Discount       REAL NOT NULL," +
+                            "Dependence     INTEGER NOT NULL," +
+                            "Parent_id      INTEGER NOT NULL," +
+                            "Discription    TEXT(124) NOT NULL  ," +
+                            "FOREIGN KEY(Parent_id) REFERENCES DillerTree(Id) )",
+                            connection))
                     {
-                        insertCommand.Parameters.AddWithValue("@Id", el.Id);
-                        insertCommand.Parameters.AddWithValue("@Name", el.Name);
-                        insertCommand.Parameters.AddWithValue("@Discount", el.Discount);
-                        insertCommand.Parameters.AddWithValue("@Dependence", el.Dependence);
-                        insertCommand.Parameters.AddWithValue("@Parent_id", el.Parent_id);
-                        insertCommand.Parameters.AddWithValue("@Discription", el.Discription);
-                        insertCommand.ExecuteNonQuery();
+                        command.ExecuteNonQuery();
                     }
+                    //4 -  ДОБАВЛЕНИЕ НАЧАЛЬНЫХ ДАННЫХ В ТАБЛИЦУ
+                    foreach (DB_Node el in dB_Nodes)
+                    {
+                        using (SQLiteCommand insertCommand = new SQLiteCommand("INSERT INTO DillerTree(Id,Name,Discount,Dependence,Parent_id,Discription) VALUES (@Id, @Name, @Discount, @Dependence , @Parent_id,  @Discription)", connection))
+                        {
+                            insertCommand.Parameters.AddWithValue("@Id", el.Id);
+                            insertCommand.Parameters.AddWithValue("@Name", el.Name);
+                            insertCommand.Parameters.AddWithValue("@Discount", el.Discount);
+                            insertCommand.Parameters.AddWithValue("@Dependence", el.Dependence);
+                            insertCommand.Parameters.AddWithValue("@Parent_id", el.Parent_id);
+                            insertCommand.Parameters.AddWithValue("@Discription", el.Discription);
+                            insertCommand.ExecuteNonQuery();
+                        }
+                    }
+
                 }
             }
             //###########################################################################################
@@ -303,9 +309,29 @@ namespace lorena_task
             //    }
             //}
 
+            //ПРОТОТИП ДЛЯ ФОРМИРОВАНИЯ СТРУКТУРЫ
+        //            private decimal CalculateDiscountPatent(DB_Node node)
+        //{
+        //    //рекурсивный метод расчета скидки предков с учетом всех предков в дереве вплоть до корня
+        //    decimal sum_discount_parent = 0;
+        //    if (node.Dependence)
+        //    {
+        //        foreach (DB_Node el in have_read_Nodes)
+        //            if (node.Parent_id == el.Id)
+        //            {
+        //                sum_discount_parent += el.Discount;
+        //                return CalculateDiscountPatent(el) + sum_discount_parent;
+        //            }
+        //        return sum_discount_parent;
+        //    }
+        //    return 0;
+        //}
 
-            //--------------------------------------------РЕАЛИЗАЦИЯ ЗАГЛУШЕК
-            System.Windows.Forms.TreeNode Miass     = new System.Windows.Forms.TreeNode("Миасс" + " (скидка " + "4" + "%, зависимости нет)");
+
+
+
+        //--------------------------------------------РЕАЛИЗАЦИЯ ЗАГЛУШЕК
+        System.Windows.Forms.TreeNode Miass     = new System.Windows.Forms.TreeNode("Миасс" + " (скидка " + "4" + "%, зависимости нет)");
 
             System.Windows.Forms.TreeNode Amelia    = new System.Windows.Forms.TreeNode("Амелия" + " (скидка " + "5" + "%, зависимость есть)");
 

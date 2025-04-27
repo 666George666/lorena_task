@@ -89,5 +89,52 @@ namespace lorena_task
 
             this.dataGridView1.Rows.Add(node.Name, node.Discount, dep(node.Dependence) , node.Discription);
         }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            if (!Char.IsDigit(ch) && ch != 8) { 
+                e.Handled = true;
+            }
+        }
+
+        //ИНТЕРЙЕС ДЛЯ ТЕСТОВ
+        //Установка цены в поле
+        public void SetPrice(decimal price) { 
+            textBox1.Text = price.ToString();
+        }
+        //выделить элемент в дереве
+        public void SelectNode(string name) {
+            //заглушка метода выбора работающая на одних исходных данных!!!
+            if(name == "Амелия")
+                treeView1.SelectedNode = treeView1.Nodes[0].Nodes[0];
+            if (name == "Тест1")
+                treeView1.SelectedNode = treeView1.Nodes[0].Nodes[0].Nodes[0];
+            if (name == "Тест2")
+                treeView1.SelectedNode = treeView1.Nodes[0].Nodes[1];
+            if (name == "Курган")
+                treeView1.SelectedNode = treeView1.Nodes[1];
+            if (name == "Миасс")
+                treeView1.SelectedNode = treeView1.Nodes[0];
+        }
+        //расчитать по формуле
+        public decimal Calculate() {
+
+            decimal price = Convert.ToDecimal(textBox1.Text);
+            //выделяем подстроку с именем салона
+            string diller_name = Convert.ToString(Regex.Match(treeView1.SelectedNode.Text, @"^([\w\-]+)"));
+
+            DB_Node node = new DB_Node();
+
+            //ищем элемент среди считанных из БД по выделенной подстроке
+            foreach (DB_Node el in have_read_Nodes)
+                if (el.Name == diller_name)
+                    node = el;
+            //расчитываем скидку предка
+            decimal discount_parent = CalculateDiscountPatent(node);
+
+            //расчитываем итоговую стоимость
+            return CalculateResult(price, node.Discount, discount_parent); ;
+        }
     }
 }
