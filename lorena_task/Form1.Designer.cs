@@ -35,12 +35,18 @@ namespace lorena_task
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Name_ = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Dependence = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Discription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.Diller = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,72 +55,63 @@ namespace lorena_task
             this._per_discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.result_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label3 = new System.Windows.Forms.Label();
-            this.treeView1 = new System.Windows.Forms.TreeView();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.sataEllipseControl1 = new SATAUiFramework.Controls.SATAEllipseControl();
+            this.sataButton1 = new FrameworkTest.SATAButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.textBox_discription = new System.Windows.Forms.TextBox();
+            this.textBox_dependence = new System.Windows.Forms.TextBox();
+            this.textBox_name_discount = new System.Windows.Forms.TextBox();
+            this.textBox_name = new System.Windows.Forms.TextBox();
+            this.discr = new System.Windows.Forms.Label();
+            this.dep = new System.Windows.Forms.Label();
+            this.disc = new System.Windows.Forms.Label();
+            this.name = new System.Windows.Forms.Label();
+            this.sataButton2 = new FrameworkTest.SATAButton();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.sataPictureBox1 = new SATAUiFramework.Controls.SATAPictureBox();
+            this.sataButton4 = new FrameworkTest.SATAButton();
+            this.sataButton3 = new FrameworkTest.SATAButton();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.treeView2 = new System.Windows.Forms.TreeView();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sataPictureBox1)).BeginInit();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(8, 72);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(95, 24);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Цена, руб";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLight;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Name_,
-            this.Discount,
-            this.Dependence,
-            this.Discription});
-            this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveBorder;
-            this.dataGridView1.Location = new System.Drawing.Point(363, 204);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(701, 75);
-            this.dataGridView1.TabIndex = 2;
-            // 
-            // Name_
-            // 
-            this.Name_.HeaderText = "Имя";
-            this.Name_.Name = "Name_";
-            // 
-            // Discount
-            // 
-            this.Discount.HeaderText = "Скидка, %";
-            this.Discount.Name = "Discount";
-            // 
-            // Dependence
-            // 
-            this.Dependence.HeaderText = "Зависимость";
-            this.Dependence.Name = "Dependence";
-            // 
-            // Discription
-            // 
-            this.Discription.HeaderText = "Описание";
-            this.Discription.Name = "Discription";
-            this.Discription.Width = 350;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(574, 177);
+            this.label2.Font = new System.Drawing.Font("GOST type B", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label2.Location = new System.Drawing.Point(6, 3);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(305, 24);
+            this.label2.Size = new System.Drawing.Size(358, 26);
             this.label2.TabIndex = 1;
             this.label2.Text = "Информация о выбраном салоне";
             // 
             // dataGridView2
             // 
-            this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("GOST type B", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.White;
+            this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
+            this.dataGridView2.BackgroundColor = System.Drawing.Color.Violet;
+            this.dataGridView2.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dataGridView2.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("GOST type B", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Diller,
@@ -122,109 +119,473 @@ namespace lorena_task
             this._discount,
             this._per_discount,
             this.result_price});
-            this.dataGridView2.Location = new System.Drawing.Point(440, 309);
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("GOST type B", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle18;
+            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dataGridView2.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.dataGridView2.Location = new System.Drawing.Point(258, 34);
             this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(544, 313);
+            this.dataGridView2.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle19;
+            this.dataGridView2.RowHeadersVisible = false;
+            this.dataGridView2.RowHeadersWidth = 60;
+            dataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle20;
+            this.dataGridView2.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.DarkOrange;
+            this.dataGridView2.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("GOST type B", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dataGridView2.Size = new System.Drawing.Size(503, 521);
             this.dataGridView2.TabIndex = 2;
             this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
             // Diller
             // 
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("GOST type B", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Document, ((byte)(204)));
+            this.Diller.DefaultCellStyle = dataGridViewCellStyle13;
             this.Diller.HeaderText = "Салон";
             this.Diller.Name = "Diller";
             // 
             // _price
             // 
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("GOST type B", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this._price.DefaultCellStyle = dataGridViewCellStyle14;
             this._price.HeaderText = "Цена, руб";
             this._price.Name = "_price";
             // 
             // _discount
             // 
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("GOST type B", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this._discount.DefaultCellStyle = dataGridViewCellStyle15;
             this._discount.HeaderText = "Скидка, %";
             this._discount.Name = "_discount";
+            this._discount.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // _per_discount
             // 
+            dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("GOST type B", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this._per_discount.DefaultCellStyle = dataGridViewCellStyle16;
             this._per_discount.HeaderText = "Скидка предка, %";
             this._per_discount.Name = "_per_discount";
             // 
             // result_price
             // 
+            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("GOST type B", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.result_price.DefaultCellStyle = dataGridViewCellStyle17;
             this.result_price.HeaderText = "Расчетная стоимость, руб";
             this.result_price.Name = "result_price";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(574, 282);
+            this.label3.Font = new System.Drawing.Font("GOST type B", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.ForeColor = System.Drawing.SystemColors.Control;
+            this.label3.Location = new System.Drawing.Point(6, 5);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(265, 24);
+            this.label3.Size = new System.Drawing.Size(326, 26);
             this.label3.TabIndex = 1;
             this.label3.Text = "История расчета стоимости";
-            // 
-            // treeView1
-            // 
-            this.treeView1.Location = new System.Drawing.Point(12, 177);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(345, 445);
-            this.treeView1.TabIndex = 3;
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // textBox1
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox1.Location = new System.Drawing.Point(109, 69);
+            this.textBox1.BackColor = System.Drawing.Color.Teal;
+            this.textBox1.Font = new System.Drawing.Font("GOST type B", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBox1.ForeColor = System.Drawing.SystemColors.Window;
+            this.textBox1.Location = new System.Drawing.Point(0, 111);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(248, 29);
+            this.textBox1.Size = new System.Drawing.Size(206, 28);
             this.textBox1.TabIndex = 4;
+            this.textBox1.Text = "Цена, руб....";
+            this.textBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox1_MouseClick);
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
-            // button1
+            // sataEllipseControl1
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(363, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(701, 162);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Рассчитать стоимость для выбранного салона";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.button1_MouseClick);
+            this.sataEllipseControl1.CornerRadius = 40;
+            this.sataEllipseControl1.TargetControl = this;
+            // 
+            // sataButton1
+            // 
+            this.sataButton1.ButtonText = "Рассчитать стоимость";
+            this.sataButton1.CheckedBackground = System.Drawing.Color.DodgerBlue;
+            this.sataButton1.CheckedForeColor = System.Drawing.Color.White;
+            this.sataButton1.CheckedImageTint = System.Drawing.Color.White;
+            this.sataButton1.CheckedOutline = System.Drawing.Color.DodgerBlue;
+            this.sataButton1.CustomDialogResult = System.Windows.Forms.DialogResult.None;
+            this.sataButton1.Font = new System.Drawing.Font("GOST type B", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.sataButton1.ForeColor = System.Drawing.SystemColors.Info;
+            this.sataButton1.HoverBackground = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.sataButton1.HoverForeColor = System.Drawing.Color.White;
+            this.sataButton1.HoverImage = null;
+            this.sataButton1.HoverImageTint = System.Drawing.Color.White;
+            this.sataButton1.HoverOutline = System.Drawing.Color.Empty;
+            this.sataButton1.Image = null;
+            this.sataButton1.ImageAutoCenter = true;
+            this.sataButton1.ImageExpand = new System.Drawing.Point(0, 0);
+            this.sataButton1.ImageOffset = new System.Drawing.Point(0, 0);
+            this.sataButton1.ImageTint = System.Drawing.Color.White;
+            this.sataButton1.IsToggleButton = false;
+            this.sataButton1.IsToggled = false;
+            this.sataButton1.Location = new System.Drawing.Point(0, 171);
+            this.sataButton1.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.sataButton1.Name = "sataButton1";
+            this.sataButton1.NormalBackground = System.Drawing.Color.DodgerBlue;
+            this.sataButton1.NormalForeColor = System.Drawing.Color.White;
+            this.sataButton1.NormalOutline = System.Drawing.Color.Empty;
+            this.sataButton1.OutlineThickness = 2F;
+            this.sataButton1.PressedBackground = System.Drawing.Color.RoyalBlue;
+            this.sataButton1.PressedForeColor = System.Drawing.Color.White;
+            this.sataButton1.PressedImageTint = System.Drawing.Color.White;
+            this.sataButton1.PressedOutline = System.Drawing.Color.Empty;
+            this.sataButton1.Rounding = new System.Windows.Forms.Padding(5);
+            this.sataButton1.Size = new System.Drawing.Size(206, 46);
+            this.sataButton1.TabIndex = 6;
+            this.sataButton1.TextAutoCenter = true;
+            this.sataButton1.TextOffset = new System.Drawing.Point(0, 0);
+            this.sataButton1.Click += new System.EventHandler(this.sataButton1_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.Orchid;
+            this.panel1.Controls.Add(this.textBox_discription);
+            this.panel1.Controls.Add(this.textBox_dependence);
+            this.panel1.Controls.Add(this.textBox_name_discount);
+            this.panel1.Controls.Add(this.textBox_name);
+            this.panel1.Controls.Add(this.discr);
+            this.panel1.Controls.Add(this.dep);
+            this.panel1.Controls.Add(this.disc);
+            this.panel1.Controls.Add(this.name);
+            this.panel1.Controls.Add(this.sataButton2);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Location = new System.Drawing.Point(206, 0);
+            this.panel1.MaximumSize = new System.Drawing.Size(5000, 5000);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(769, 93);
+            this.panel1.TabIndex = 8;
+            // 
+            // textBox_discription
+            // 
+            this.textBox_discription.Location = new System.Drawing.Point(328, 62);
+            this.textBox_discription.Name = "textBox_discription";
+            this.textBox_discription.Size = new System.Drawing.Size(423, 20);
+            this.textBox_discription.TabIndex = 10;
+            // 
+            // textBox_dependence
+            // 
+            this.textBox_dependence.Location = new System.Drawing.Point(219, 62);
+            this.textBox_dependence.Name = "textBox_dependence";
+            this.textBox_dependence.Size = new System.Drawing.Size(100, 20);
+            this.textBox_dependence.TabIndex = 10;
+            // 
+            // textBox_name_discount
+            // 
+            this.textBox_name_discount.Location = new System.Drawing.Point(113, 62);
+            this.textBox_name_discount.Name = "textBox_name_discount";
+            this.textBox_name_discount.Size = new System.Drawing.Size(100, 20);
+            this.textBox_name_discount.TabIndex = 10;
+            // 
+            // textBox_name
+            // 
+            this.textBox_name.Location = new System.Drawing.Point(10, 62);
+            this.textBox_name.Name = "textBox_name";
+            this.textBox_name.Size = new System.Drawing.Size(100, 20);
+            this.textBox_name.TabIndex = 10;
+            // 
+            // discr
+            // 
+            this.discr.AutoSize = true;
+            this.discr.Font = new System.Drawing.Font("GOST type B", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.discr.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.discr.Location = new System.Drawing.Point(325, 38);
+            this.discr.Name = "discr";
+            this.discr.Size = new System.Drawing.Size(83, 21);
+            this.discr.TabIndex = 9;
+            this.discr.Text = "Описание";
+            // 
+            // dep
+            // 
+            this.dep.AutoSize = true;
+            this.dep.Font = new System.Drawing.Font("GOST type B", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dep.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.dep.Location = new System.Drawing.Point(216, 38);
+            this.dep.Name = "dep";
+            this.dep.Size = new System.Drawing.Size(111, 21);
+            this.dep.TabIndex = 9;
+            this.dep.Text = "Зависимость";
+            // 
+            // disc
+            // 
+            this.disc.AutoSize = true;
+            this.disc.Font = new System.Drawing.Font("GOST type B", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.disc.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.disc.Location = new System.Drawing.Point(110, 38);
+            this.disc.Name = "disc";
+            this.disc.Size = new System.Drawing.Size(95, 21);
+            this.disc.TabIndex = 9;
+            this.disc.Text = "Скидка, %";
+            // 
+            // name
+            // 
+            this.name.AutoSize = true;
+            this.name.Font = new System.Drawing.Font("GOST type B", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.name.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.name.Location = new System.Drawing.Point(7, 38);
+            this.name.Name = "name";
+            this.name.Size = new System.Drawing.Size(39, 21);
+            this.name.TabIndex = 9;
+            this.name.Text = "Имя";
+            // 
+            // sataButton2
+            // 
+            this.sataButton2.ButtonText = "";
+            this.sataButton2.CheckedBackground = System.Drawing.Color.DodgerBlue;
+            this.sataButton2.CheckedForeColor = System.Drawing.Color.White;
+            this.sataButton2.CheckedImageTint = System.Drawing.Color.White;
+            this.sataButton2.CheckedOutline = System.Drawing.Color.DodgerBlue;
+            this.sataButton2.CustomDialogResult = System.Windows.Forms.DialogResult.None;
+            this.sataButton2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.sataButton2.HoverBackground = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
+            this.sataButton2.HoverForeColor = System.Drawing.Color.White;
+            this.sataButton2.HoverImage = null;
+            this.sataButton2.HoverImageTint = System.Drawing.Color.White;
+            this.sataButton2.HoverOutline = System.Drawing.Color.Empty;
+            this.sataButton2.Image = global::lorena_task.Properties.Resources.icons8_close_50;
+            this.sataButton2.ImageAutoCenter = true;
+            this.sataButton2.ImageExpand = new System.Drawing.Point(0, 0);
+            this.sataButton2.ImageOffset = new System.Drawing.Point(0, 0);
+            this.sataButton2.ImageTint = System.Drawing.Color.White;
+            this.sataButton2.IsToggleButton = false;
+            this.sataButton2.IsToggled = false;
+            this.sataButton2.Location = new System.Drawing.Point(726, 0);
+            this.sataButton2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.sataButton2.Name = "sataButton2";
+            this.sataButton2.NormalBackground = System.Drawing.Color.AliceBlue;
+            this.sataButton2.NormalForeColor = System.Drawing.Color.White;
+            this.sataButton2.NormalOutline = System.Drawing.Color.Empty;
+            this.sataButton2.OutlineThickness = 2F;
+            this.sataButton2.PressedBackground = System.Drawing.Color.RoyalBlue;
+            this.sataButton2.PressedForeColor = System.Drawing.Color.White;
+            this.sataButton2.PressedImageTint = System.Drawing.Color.White;
+            this.sataButton2.PressedOutline = System.Drawing.Color.Empty;
+            this.sataButton2.Rounding = new System.Windows.Forms.Padding(5);
+            this.sataButton2.Size = new System.Drawing.Size(43, 21);
+            this.sataButton2.TabIndex = 8;
+            this.sataButton2.TextAutoCenter = true;
+            this.sataButton2.TextOffset = new System.Drawing.Point(0, 0);
+            this.sataButton2.Click += new System.EventHandler(this.sataButton2_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(88)))), ((int)(((byte)(3)))));
+            this.panel2.Controls.Add(this.sataPictureBox1);
+            this.panel2.Controls.Add(this.textBox1);
+            this.panel2.Controls.Add(this.sataButton4);
+            this.panel2.Controls.Add(this.sataButton3);
+            this.panel2.Controls.Add(this.sataButton1);
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.MaximumSize = new System.Drawing.Size(206, 643);
+            this.panel2.MinimumSize = new System.Drawing.Size(206, 643);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(206, 643);
+            this.panel2.TabIndex = 9;
+            // 
+            // sataPictureBox1
+            // 
+            this.sataPictureBox1.BorderCapStyle = System.Drawing.Drawing2D.DashCap.Flat;
+            this.sataPictureBox1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(79)))), ((int)(((byte)(165)))));
+            this.sataPictureBox1.BorderColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(68)))), ((int)(((byte)(142)))));
+            this.sataPictureBox1.BorderLineStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.sataPictureBox1.BorderSize = 1;
+            this.sataPictureBox1.GradientAngle = 50F;
+            this.sataPictureBox1.Image = global::lorena_task.Properties.Resources.logo;
+            this.sataPictureBox1.InitialImage = global::lorena_task.Properties.Resources.logo;
+            this.sataPictureBox1.Location = new System.Drawing.Point(59, 9);
+            this.sataPictureBox1.Name = "sataPictureBox1";
+            this.sataPictureBox1.Size = new System.Drawing.Size(73, 73);
+            this.sataPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.sataPictureBox1.TabIndex = 7;
+            this.sataPictureBox1.TabStop = false;
+            // 
+            // sataButton4
+            // 
+            this.sataButton4.ButtonText = "Удалить салон";
+            this.sataButton4.CheckedBackground = System.Drawing.Color.DodgerBlue;
+            this.sataButton4.CheckedForeColor = System.Drawing.Color.White;
+            this.sataButton4.CheckedImageTint = System.Drawing.Color.White;
+            this.sataButton4.CheckedOutline = System.Drawing.Color.DodgerBlue;
+            this.sataButton4.CustomDialogResult = System.Windows.Forms.DialogResult.None;
+            this.sataButton4.Font = new System.Drawing.Font("GOST type B", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.sataButton4.HoverBackground = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.sataButton4.HoverForeColor = System.Drawing.Color.White;
+            this.sataButton4.HoverImage = null;
+            this.sataButton4.HoverImageTint = System.Drawing.Color.White;
+            this.sataButton4.HoverOutline = System.Drawing.Color.Empty;
+            this.sataButton4.Image = global::lorena_task.Properties.Resources.icons8_delete_bookmark_50;
+            this.sataButton4.ImageAutoCenter = true;
+            this.sataButton4.ImageExpand = new System.Drawing.Point(0, 0);
+            this.sataButton4.ImageOffset = new System.Drawing.Point(0, 0);
+            this.sataButton4.ImageTint = System.Drawing.Color.White;
+            this.sataButton4.IsToggleButton = false;
+            this.sataButton4.IsToggled = false;
+            this.sataButton4.Location = new System.Drawing.Point(0, 327);
+            this.sataButton4.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.sataButton4.Name = "sataButton4";
+            this.sataButton4.NormalBackground = System.Drawing.Color.DodgerBlue;
+            this.sataButton4.NormalForeColor = System.Drawing.Color.White;
+            this.sataButton4.NormalOutline = System.Drawing.Color.Empty;
+            this.sataButton4.OutlineThickness = 2F;
+            this.sataButton4.PressedBackground = System.Drawing.Color.RoyalBlue;
+            this.sataButton4.PressedForeColor = System.Drawing.Color.White;
+            this.sataButton4.PressedImageTint = System.Drawing.Color.White;
+            this.sataButton4.PressedOutline = System.Drawing.Color.Empty;
+            this.sataButton4.Rounding = new System.Windows.Forms.Padding(5);
+            this.sataButton4.Size = new System.Drawing.Size(206, 46);
+            this.sataButton4.TabIndex = 6;
+            this.sataButton4.TextAutoCenter = true;
+            this.sataButton4.TextOffset = new System.Drawing.Point(0, 0);
+            this.sataButton4.Click += new System.EventHandler(this.sataButton4_Click);
+            // 
+            // sataButton3
+            // 
+            this.sataButton3.ButtonText = "Добавить салон";
+            this.sataButton3.CheckedBackground = System.Drawing.Color.DodgerBlue;
+            this.sataButton3.CheckedForeColor = System.Drawing.Color.White;
+            this.sataButton3.CheckedImageTint = System.Drawing.Color.White;
+            this.sataButton3.CheckedOutline = System.Drawing.Color.DodgerBlue;
+            this.sataButton3.CustomDialogResult = System.Windows.Forms.DialogResult.None;
+            this.sataButton3.Font = new System.Drawing.Font("GOST type B", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.sataButton3.HoverBackground = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.sataButton3.HoverForeColor = System.Drawing.Color.White;
+            this.sataButton3.HoverImage = null;
+            this.sataButton3.HoverImageTint = System.Drawing.Color.White;
+            this.sataButton3.HoverOutline = System.Drawing.Color.Empty;
+            this.sataButton3.Image = global::lorena_task.Properties.Resources.icons8_delete_bookmark_50;
+            this.sataButton3.ImageAutoCenter = true;
+            this.sataButton3.ImageExpand = new System.Drawing.Point(0, 0);
+            this.sataButton3.ImageOffset = new System.Drawing.Point(0, 0);
+            this.sataButton3.ImageTint = System.Drawing.Color.White;
+            this.sataButton3.IsToggleButton = false;
+            this.sataButton3.IsToggled = false;
+            this.sataButton3.Location = new System.Drawing.Point(0, 249);
+            this.sataButton3.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.sataButton3.Name = "sataButton3";
+            this.sataButton3.NormalBackground = System.Drawing.Color.DodgerBlue;
+            this.sataButton3.NormalForeColor = System.Drawing.Color.White;
+            this.sataButton3.NormalOutline = System.Drawing.Color.Empty;
+            this.sataButton3.OutlineThickness = 2F;
+            this.sataButton3.PressedBackground = System.Drawing.Color.RoyalBlue;
+            this.sataButton3.PressedForeColor = System.Drawing.Color.White;
+            this.sataButton3.PressedImageTint = System.Drawing.Color.White;
+            this.sataButton3.PressedOutline = System.Drawing.Color.Empty;
+            this.sataButton3.Rounding = new System.Windows.Forms.Padding(5);
+            this.sataButton3.Size = new System.Drawing.Size(206, 46);
+            this.sataButton3.TabIndex = 6;
+            this.sataButton3.TextAutoCenter = true;
+            this.sataButton3.TextOffset = new System.Drawing.Point(0, 0);
+            this.sataButton3.Click += new System.EventHandler(this.sataButton3_Click);
+            // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(134)))), ((int)(((byte)(203)))));
+            this.panel3.Controls.Add(this.panel4);
+            this.panel3.Controls.Add(this.dataGridView2);
+            this.panel3.Controls.Add(this.treeView2);
+            this.panel3.Location = new System.Drawing.Point(206, 88);
+            this.panel3.MaximumSize = new System.Drawing.Size(1000, 1000);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(761, 555);
+            this.panel3.TabIndex = 10;
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.Orchid;
+            this.panel4.Controls.Add(this.label3);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(258, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(503, 36);
+            this.panel4.TabIndex = 5;
+            // 
+            // treeView2
+            // 
+            this.treeView2.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.treeView2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.treeView2.Font = new System.Drawing.Font("GOST type B", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.treeView2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.treeView2.ImageKey = "citycons_building-512_9481.png";
+            this.treeView2.ImageList = this.imageList1;
+            this.treeView2.Location = new System.Drawing.Point(0, 0);
+            this.treeView2.Name = "treeView2";
+            this.treeView2.SelectedImageIndex = 0;
+            this.treeView2.Size = new System.Drawing.Size(258, 555);
+            this.treeView2.TabIndex = 4;
+            this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "citycons_building-512_9481.png");
+            this.imageList1.Images.SetKeyName(1, "lorena1.jpg");
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1076, 634);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.treeView1);
-            this.Controls.Add(this.dataGridView2);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackColor = System.Drawing.Color.Teal;
+            this.ClientSize = new System.Drawing.Size(969, 643);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sataPictureBox1)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Name_;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Discount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Dependence;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Discription;
 
 
         private void InitializeBD()
@@ -289,10 +650,12 @@ namespace lorena_task
             have_read_Nodes = have_read_dB_Nodes;
             //###########################################################################################
             //СОЗДАНИЕ ЭЛЕМЕНТОВ ДРЕВОВИДНОГО ПРЕДСТАВЛЕНИЯ
-            List<System.Windows.Forms.TreeNode> lst_FormsTree_Node = new List<System.Windows.Forms.TreeNode>();//контейнер для хранения
+           // List<System.Windows.Forms.TreeNode> lst_FormsTree_Node = new List<System.Windows.Forms.TreeNode>();
 
-            //foreach (DB_Node el in have_read_dB_Nodes) {//просматриваем загруженные из БД элементы
-
+            foreach (DB_Node el in have_read_dB_Nodes){//просматриваем загруженные из БД элементы
+            
+            
+            }
             //    if (! el.Dependence){//если зависимости нет то просто создаем корнейвой элемент
             //        lst_FormsTree_Node.Add( new System.Windows.Forms.TreeNode( el.Name + " (скидка "+ el.Discount + "%, зависимости нет)" ));
             //    }
@@ -309,27 +672,6 @@ namespace lorena_task
             //    }
             //}
 
-            //ПРОТОТИП ДЛЯ ФОРМИРОВАНИЯ СТРУКТУРЫ
-        //            private decimal CalculateDiscountPatent(DB_Node node)
-        //{
-        //    //рекурсивный метод расчета скидки предков с учетом всех предков в дереве вплоть до корня
-        //    decimal sum_discount_parent = 0;
-        //    if (node.Dependence)
-        //    {
-        //        foreach (DB_Node el in have_read_Nodes)
-        //            if (node.Parent_id == el.Id)
-        //            {
-        //                sum_discount_parent += el.Discount;
-        //                return CalculateDiscountPatent(el) + sum_discount_parent;
-        //            }
-        //        return sum_discount_parent;
-        //    }
-        //    return 0;
-        //}
-
-
-
-
         //--------------------------------------------РЕАЛИЗАЦИЯ ЗАГЛУШЕК
         System.Windows.Forms.TreeNode Miass     = new System.Windows.Forms.TreeNode("Миасс" + " (скидка " + "4" + "%, зависимости нет)");
 
@@ -342,20 +684,23 @@ namespace lorena_task
             System.Windows.Forms.TreeNode Kurgan    = new System.Windows.Forms.TreeNode("Курган" + " (скидка " + "11" + "%, зависимости нет)");
 
 
+            
             Amelia.Nodes.Add(Test1);
+            
+
             Miass.Nodes.Add(Amelia);
             Miass.Nodes.Add(Test2);
 
-            this.treeView1.Nodes.Add(Miass);
-            this.treeView1.Nodes.Add(Kurgan);
+            this.treeView2.Nodes.Add(Miass);
+            this.treeView2.Nodes.Add(Kurgan);
 
 
-            //foreach (System.Windows.Forms.TreeNode el in lst_FormsTree_Node)
-            //    this.treeView1.Nodes.Add(el);
+            //List<System.Windows.Forms.TreeNode> TreeNodeLst = GenTreeNodeList();
+            //foreach (System.Windows.Forms.TreeNode el in TreeNodeLst)
+            //    this.treeView2.Nodes.Add(el);
 
-
-            this.Controls.Add(this.treeView1);
-            this.treeView1.ExpandAll();
+            //this.Controls.Add(this.treeView2);
+            this.treeView2.ExpandAll();//раскрыть все элементы
 
         }
 
@@ -387,12 +732,31 @@ namespace lorena_task
                 return have_read_dB_Nodes;
         }
         private List<DB_Node> have_read_Nodes;
-        private Button button1;
+        private SATAUiFramework.Controls.SATAEllipseControl sataEllipseControl1;
+        private FrameworkTest.SATAButton sataButton1;
+        private SATAUiFramework.Controls.SATAPictureBox sataPictureBox1;
+        private Panel panel3;
+        private Panel panel2;
+        private Panel panel1;
+        private FrameworkTest.SATAButton sataButton2;
+        private FrameworkTest.SATAButton sataButton3;
+        private TreeView treeView2;
+        private Panel panel4;
+        private Label name;
+        private TextBox textBox_discription;
+        private TextBox textBox_dependence;
+        private TextBox textBox_name_discount;
+        private TextBox textBox_name;
+        private Label discr;
+        private Label dep;
+        private Label disc;
         private DataGridViewTextBoxColumn Diller;
         private DataGridViewTextBoxColumn _price;
         private DataGridViewTextBoxColumn _discount;
         private DataGridViewTextBoxColumn _per_discount;
         private DataGridViewTextBoxColumn result_price;
+        private FrameworkTest.SATAButton sataButton4;
+        private ImageList imageList1;
     }
 }
 
