@@ -1,17 +1,18 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SQLite;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SQLite;
-using System.Collections;
 using static System.Net.Mime.MediaTypeNames;
-using System.Text.RegularExpressions;
-using System.Diagnostics;
 
 namespace lorena_task
 {
@@ -198,25 +199,80 @@ namespace lorena_task
         }
 
 
-        private void sataButton3_Click(object sender, EventArgs e) { 
+        private void sataButton3_Click(object sender, EventArgs e) {
             //добавить салон
 
             //вызвать диалоговое окно мастера добавления с формой для заполнения
+
+            Form2 fom2 = new Form2();
+            
+            //fom2.ShowDialog();
+
+            //fom2.GetNameLine();
+            //fom2.GetDisripLine();
+            //fom2.
+
             // задаваемые параметры  имя  - скидка - зависимость  - описание
-            // для указания зависимости вывести список имен узлов дерева
+            // для указания зависимости вывести список имен узлов дерева которые уже есть в БД
+
+            //добавить нвоый элемент в БД в необходимое место
+
+            //3 - СОЗДАНИЕ И ОТКРЫТИЕ БД
+            //using (connection = new SQLiteConnection($"Data Source = lorena_data.db;Version = 3"))
+            //{
+            //    connection.Open();
+
+            //    using (SQLiteCommand insertCommand = new SQLiteCommand("INSERT INTO DillerTree(Id,Name,Discount,Dependence,Parent_id,Discription) VALUES (@Id, @Name, @Discount, @Dependence , @Parent_id,  @Discription)", connection))
+            //    {
+            //            insertCommand.Parameters.AddWithValue("@Id", el.Id);
+            //            insertCommand.Parameters.AddWithValue("@Name", el.Name);
+            //            insertCommand.Parameters.AddWithValue("@Discount", el.Discount);
+            //            insertCommand.Parameters.AddWithValue("@Dependence", el.Dependence);
+            //            insertCommand.Parameters.AddWithValue("@Parent_id", el.Parent_id);
+            //            insertCommand.Parameters.AddWithValue("@Discription", el.Discription);
+            //            insertCommand.ExecuteNonQuery();
+            //    }
+            //}
+
+
+
+            // отобразить БД 
             // найти в дереве элемент по выбраному имени и добавтиь к нему дочерний узел
 
         }
 
         private void sataButton4_Click(object sender, EventArgs e)
         {
-            //удаление узла
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult res = MessageBox.Show("ВЫ действительно хотите удалить выбраный салон и все подсалоны при их наличии?", "Предупреждение", buttons);
+         
+            if (res == DialogResult.Yes) {
+                //удаление узла
+                // првоерить какой элемент выделен и запомнить его имя
+                string selectedNode = this.treeView2.SelectedNode.Name;
+                //если листовой то просто удалить (из представления)
+                this.treeView2.SelectedNode.Remove();
+                //если корневой то удалить все (из представления удаляется автоматически) с предупреждающим диалоговым окном
 
-            // првоерить какой элемент выделен и запомнить его имя
 
-            //если листовой то просто удалить
-            //если корневой то удалить все с предупреждающим диалоговым окном
+                //запрос на удаление к БД!!может он тоже сможет сам обработатться для вложенных узлов?
+                string dbPath = "lorena_data.db";//ОТКРЫВАЕМ СОЗДАННУЮ БД заного так как using вызывает деструктор
+                using (connection = new SQLiteConnection($"Data Source = {dbPath};Version = 3"))
+                {
+                    connection.Open();
 
+                    string sqlQuery = "DELETE FROM DillerTree WHERE Name = @" + selectedNode;
+
+                    using (SQLiteCommand selectCommand = new SQLiteCommand(sqlQuery, connection))
+                    {
+                        selectCommand.Parameters.AddWithValue("@"+ selectedNode, selectedNode);
+                        selectCommand.ExecuteNonQuery();
+                    }
+                }
+
+
+
+            }
         }
 
         private void label3_Click(object sender, EventArgs e)

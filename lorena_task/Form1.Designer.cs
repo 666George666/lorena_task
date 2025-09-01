@@ -4,6 +4,7 @@ using System.Data.SQLite;
 using System.Timers;
 using System.Windows.Forms;
 using System.IO;
+using System.Linq;
 
 namespace lorena_task
 {
@@ -590,57 +591,80 @@ namespace lorena_task
 
         private void InitializeBD()
         {
-            //###########################################################################################
-            //1 - ПОДГОТОВКА ДАННЫХ ДЛЯ ВСТАВКИ ПО УМОЛЧАНИЮ
-            List<DB_Node> dB_Nodes = new List<DB_Node>();
-            dB_Nodes.Add(new DB_Node(1, "Миасс", 4, false, 0, "Это описание  Миасскаого подразделения"));
-            dB_Nodes.Add(new DB_Node(2, "Амелия", 5, true, 1, "Это описание  подразделения Амелия"));
-            dB_Nodes.Add(new DB_Node(3, "Тест1", 2, true, 2, "Это описание  подразделения Тест1"));
-            dB_Nodes.Add(new DB_Node(4, "Тест2", 0, true, 1, "Это описание  подразделения Тест2"));
-            dB_Nodes.Add(new DB_Node(5, "Курган", 11, false, 0, "Это описание  подразделения Курган"));
-            //###########################################################################################
-            // 2 -  УСТАНОВЛЕНИЕ СОЕДИНЕНИЯ С БД
-            string dbPath = "lorena_data.db";//путь к базе данных в папке с проектом
 
-            if( !File.Exists(dbPath)) {
+                //###########################################################################################
+                //1 - ПОДГОТОВКА ДАННЫХ ДЛЯ ВСТАВКИ ПО УМОЛЧАНИЮ
+                List<DB_Node> dB_Nodes = new List<DB_Node>();
+                dB_Nodes.Add(new DB_Node(1, "Миасс", 4, false, 0, "Это описание  Миасскаого подразделения"));
+                dB_Nodes.Add(new DB_Node(2, "Амелия", 5, true, 1, "Это описание  подразделения Амелия"));
+                dB_Nodes.Add(new DB_Node(3, "Тест1", 2, true, 2, "Это описание  подразделения Тест1"));
+                dB_Nodes.Add(new DB_Node(4, "Тест2", 0, true, 1, "Это описание  подразделения Тест2"));
+                dB_Nodes.Add(new DB_Node(5, "Курган", 11, false, 0, "Это описание  подразделения Курган"));
+                //###########################################################################################
+                // 2 -  УСТАНОВЛЕНИЕ СОЕДИНЕНИЯ С БД
+                string dbPath = "lorena_data.db";//путь к базе данных в папке с проектом
 
-                //3 - СОЗДАНИЕ И ОТКРЫТИЕ БД
-                using (connection = new SQLiteConnection($"Data Source = {dbPath};Version = 3"))
-                {
-                    connection.Open();
-                    //3 СОЗДАНИЕ ТАБЛИЦЫ
-                    using (SQLiteCommand command = new SQLiteCommand(
-                        "CREATE TABLE IF NOT EXISTS DillerTree(" +
-                            "Id             INTEGER PRIMARY KEY NOT NULL UNIQUE," +
-                            "Name           TEXT NOT NULL," +
-                            "Discount       REAL NOT NULL," +
-                            "Dependence     INTEGER NOT NULL," +
-                            "Parent_id      INTEGER NOT NULL," +
-                            "Discription    TEXT(124) NOT NULL  ," +
-                            "FOREIGN KEY(Parent_id) REFERENCES DillerTree(Id) )",
-                            connection))
+                if (!File.Exists(dbPath)) {
+
+                    //3 - СОЗДАНИЕ И ОТКРЫТИЕ БД
+                    using (connection = new SQLiteConnection($"Data Source = {dbPath};Version = 3"))
                     {
-                        command.ExecuteNonQuery();
-                    }
-                    //4 -  ДОБАВЛЕНИЕ НАЧАЛЬНЫХ ДАННЫХ В ТАБЛИЦУ
-                    foreach (DB_Node el in dB_Nodes)
-                    {
-                        using (SQLiteCommand insertCommand = new SQLiteCommand("INSERT INTO DillerTree(Id,Name,Discount,Dependence,Parent_id,Discription) VALUES (@Id, @Name, @Discount, @Dependence , @Parent_id,  @Discription)", connection))
+                        connection.Open();
+                        //3 СОЗДАНИЕ ТАБЛИЦЫ
+                        using (SQLiteCommand command = new SQLiteCommand(
+                            "CREATE TABLE IF NOT EXISTS DillerTree(" +
+                                "Id             INTEGER PRIMARY KEY NOT NULL UNIQUE," +
+                                "Name           TEXT NOT NULL," +
+                                "Discount       REAL NOT NULL," +
+                                "Dependence     INTEGER NOT NULL," +
+                                "Parent_id      INTEGER NOT NULL," +
+                                "Discription    TEXT(124) NOT NULL  ," +
+                                "FOREIGN KEY(Parent_id) REFERENCES DillerTree(Id) )",
+                                connection))
                         {
-                            insertCommand.Parameters.AddWithValue("@Id", el.Id);
-                            insertCommand.Parameters.AddWithValue("@Name", el.Name);
-                            insertCommand.Parameters.AddWithValue("@Discount", el.Discount);
-                            insertCommand.Parameters.AddWithValue("@Dependence", el.Dependence);
-                            insertCommand.Parameters.AddWithValue("@Parent_id", el.Parent_id);
-                            insertCommand.Parameters.AddWithValue("@Discription", el.Discription);
-                            insertCommand.ExecuteNonQuery();
+                            command.ExecuteNonQuery();
                         }
-                    }
+                        //4 -  ДОБАВЛЕНИЕ НАЧАЛЬНЫХ ДАННЫХ В ТАБЛИЦУ
+                        foreach (DB_Node el in dB_Nodes)
+                        {
+                            using (SQLiteCommand insertCommand = new SQLiteCommand("INSERT INTO DillerTree(Id,Name,Discount,Dependence,Parent_id,Discription) VALUES (@Id, @Name, @Discount, @Dependence , @Parent_id,  @Discription)", connection))
+                            {
+                                insertCommand.Parameters.AddWithValue("@Id", el.Id);
+                                insertCommand.Parameters.AddWithValue("@Name", el.Name);
+                                insertCommand.Parameters.AddWithValue("@Discount", el.Discount);
+                                insertCommand.Parameters.AddWithValue("@Dependence", el.Dependence);
+                                insertCommand.Parameters.AddWithValue("@Parent_id", el.Parent_id);
+                                insertCommand.Parameters.AddWithValue("@Discription", el.Discription);
+                                insertCommand.ExecuteNonQuery();
+                            }
+                        }
 
+                    }
                 }
-            }
-            //###########################################################################################
+                //###########################################################################################
         }
+
+
+        //public bool CheckIfSQLiteDatabaseExists(string dbFilePath)
+       // {
+            //try
+            //{
+            //    // Пробуем создать подключение к существующему файлу БД
+            //    using var connection = new SQLiteConnection($"Data Source={dbFilePath};Version=3;");
+
+            //    // Открываем соединение с базой данных
+            //    connection.Open();
+
+            //    return true; // Если открытие прошло успешно, значит база существует
+            //}
+            //catch (SQLiteException ex)
+            //{
+            //    if (ex.ErrorCode == SQLiteErrorCode.CANTOPEN || ex.ErrorCode == SQLiteErrorCode.IOERR)
+            //        return false; // Файл отсутствует или файл поврежден
+
+            //    throw; // Повторяем исключение вверх по стеку, если ошибка другого типа
+            //}
+      //  }
 
 
         private void InitTreeView(){
@@ -650,58 +674,55 @@ namespace lorena_task
             have_read_Nodes = have_read_dB_Nodes;
             //###########################################################################################
             //СОЗДАНИЕ ЭЛЕМЕНТОВ ДРЕВОВИДНОГО ПРЕДСТАВЛЕНИЯ
-           // List<System.Windows.Forms.TreeNode> lst_FormsTree_Node = new List<System.Windows.Forms.TreeNode>();
+            List<System.Windows.Forms.TreeNode> lst_FormsTree_Node = new List<System.Windows.Forms.TreeNode>();
 
             foreach (DB_Node el in have_read_dB_Nodes){//просматриваем загруженные из БД элементы
-            
-            
+                if (!el.Dependence)
+                {//если зависимости нет то просто создаем корнейвой элемент
+                    lst_FormsTree_Node.Add( new System.Windows.Forms.TreeNode(el.Name) );
+                    lst_FormsTree_Node.Last().Name = el.Name;//задаем имя узла такое же как и текст узла
+                }
+                else{
+                    string temp_substr = "";
+                    //1 если есть зависимость то ищем имя родителя по идентификатору в загруженных из БД элементов
+                    //и запоминаем имя элемента предка
+                    foreach (DB_Node el1 in have_read_dB_Nodes)
+                        if (el1.Id == el.Parent_id) {
+                             temp_substr = el1.Name;//запоминаем имя элемента предка что бы затем выполнить поиск имени по ключу
+                            break;
+                            //в уже сформированных элементах древовидной стурктуры
+                        }
+
+                     //2- если есть зависимость - просмотреть корневые элементы которые уже добавлены
+                     foreach (System.Windows.Forms.TreeNode el2 in lst_FormsTree_Node) {
+
+                        if (el2.Name == temp_substr)
+                        {
+                            el2.Nodes.Add(new System.Windows.Forms.TreeNode{Text = el.Name, Name = el.Name }   );
+                            
+                            break;
+                        }
+                        //сначала проверка не является ли корневой элементом с ключем (в ситуации когда ни один не добавлен)
+                        //3- выполнить поиск по ключу (он вроде задается) вплоть до листа
+                        else
+                        {
+                            TreeNode[] colection_find = el2.Nodes.Find(temp_substr, true);//ЗДЕСЬ ПОЧЕМУ ТО ЗАТЫК (ЗДЕСЬ ПЫТАЮСЬ НАЙТИ ТО ЧЕГО НЕТ ведь изначально я не добавил еще)!
+                            if (colection_find.Length != 0)
+                            {
+                                //4- если нашли элемент с ключем (по имени узла), то по этой ссылке (а это точно ссылка?) вставляем потомка 
+                                colection_find.First().Nodes.Add(new System.Windows.Forms.TreeNode { Text = el.Name, Name = el.Name });
+                                break;
+                            }
+                        
+                        }
+                     }
+                }
             }
-            //    if (! el.Dependence){//если зависимости нет то просто создаем корнейвой элемент
-            //        lst_FormsTree_Node.Add( new System.Windows.Forms.TreeNode( el.Name + " (скидка "+ el.Discount + "%, зависимости нет)" ));
-            //    }
-            //    else {
-            //        //если есть зависимость то ищем родителя по идентификатору в загруженных из БД элементов
-            //        foreach (DB_Node el2 in have_read_dB_Nodes)
-            //            if (el2.Id == el.Parent_id){//если нашли идентификатор
-            //                string temp_substr = el2.Name;//запоминаем имя элемента предка
-            //                foreach (System.Windows.Forms.TreeNode el3 in lst_FormsTree_Node) { // ищем подстроку с именем в уже созданных узлах
-            //                    if ( ! Convert.ToBoolean( el3.Text.IndexOf(temp_substr) ) ) 
-            //                            el3.Nodes.Add( new System.Windows.Forms.TreeNode(el.Name + " (скидка " + el.Discount + "%, зависимость есть)") ); 
-            //                     }
-            //            }
-            //    }
-            //}
 
-        //--------------------------------------------РЕАЛИЗАЦИЯ ЗАГЛУШЕК
-        System.Windows.Forms.TreeNode Miass     = new System.Windows.Forms.TreeNode("Миасс" + " (скидка " + "4" + "%, зависимости нет)");
+            foreach (System.Windows.Forms.TreeNode el in lst_FormsTree_Node)
+                          this.treeView2.Nodes.Add(el);
 
-            System.Windows.Forms.TreeNode Amelia    = new System.Windows.Forms.TreeNode("Амелия" + " (скидка " + "5" + "%, зависимость есть)");
-
-            System.Windows.Forms.TreeNode Test1     = new System.Windows.Forms.TreeNode("Тест1" + " (скидка " + "2" + "%, зависимость есть)");
-
-            System.Windows.Forms.TreeNode Test2     = new System.Windows.Forms.TreeNode("Тест2" + " (скидка " + "0" + "%, зависимость есть)");
-
-            System.Windows.Forms.TreeNode Kurgan    = new System.Windows.Forms.TreeNode("Курган" + " (скидка " + "11" + "%, зависимости нет)");
-
-
-            
-            Amelia.Nodes.Add(Test1);
-            
-
-            Miass.Nodes.Add(Amelia);
-            Miass.Nodes.Add(Test2);
-
-            this.treeView2.Nodes.Add(Miass);
-            this.treeView2.Nodes.Add(Kurgan);
-
-
-            //List<System.Windows.Forms.TreeNode> TreeNodeLst = GenTreeNodeList();
-            //foreach (System.Windows.Forms.TreeNode el in TreeNodeLst)
-            //    this.treeView2.Nodes.Add(el);
-
-            //this.Controls.Add(this.treeView2);
             this.treeView2.ExpandAll();//раскрыть все элементы
-
         }
 
         private List<DB_Node> Read_All_db_Nodes() {
