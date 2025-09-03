@@ -606,36 +606,67 @@ namespace lorena_task
 
                 if (!File.Exists(dbPath)) {
 
-                    //3 - СОЗДАНИЕ И ОТКРЫТИЕ БД
-                    using (connection = new SQLiteConnection($"Data Source = {dbPath};Version = 3"))
+
+                //3 - СОЗДАНИЕ И ОТКРЫТИЕ БД
+                using (connection = new SQLiteConnection($"Data Source = {dbPath};Version = 3"))
                     {
                         connection.Open();
-                        //3 СОЗДАНИЕ ТАБЛИЦЫ
-                        using (SQLiteCommand command = new SQLiteCommand(
+
+                    //#######################
+
+                    //#############предаврительная натсрйока на возможность каскадного удаления
+                    using (SQLiteCommand command = new SQLiteCommand("PRAGMA foreign_keys = ON;", connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+
+
+                    //3 СОЗДАНИЕ ТАБЛИЦЫ
+                    using (SQLiteCommand command = new SQLiteCommand(
                             "CREATE TABLE IF NOT EXISTS DillerTree(" +
-                                "Id             INTEGER PRIMARY KEY NOT NULL UNIQUE," +
+                                "Id             INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE," +
                                 "Name           TEXT NOT NULL," +
                                 "Discount       REAL NOT NULL," +
                                 "Dependence     INTEGER NOT NULL," +
-                                "Parent_id      INTEGER NOT NULL," +
-                                "Discription    TEXT(124) NOT NULL  ," +
-                                "FOREIGN KEY(Parent_id) REFERENCES DillerTree(Id) )",
-                                connection))
+                                "Parent_id      INTEGER REFERENCES DillerTree(Id) ON DELETE CASCADE," +
+                                "Discription    TEXT(124) NOT NULL," +
+                                "FOREIGN KEY(Parent_id) REFERENCES DillerTree(Id) ON DELETE CASCADE);"
+                                , connection))
                         {
                             command.ExecuteNonQuery();
                         }
-                        //4 -  ДОБАВЛЕНИЕ НАЧАЛЬНЫХ ДАННЫХ В ТАБЛИЦУ
-                        foreach (DB_Node el in dB_Nodes)
+
+
+
+
+
+                    //4 -  ДОБАВЛЕНИЕ НАЧАЛЬНЫХ ДАННЫХ В ТАБЛИЦУ
+                    foreach (DB_Node el in dB_Nodes)
                         {
-                            using (SQLiteCommand insertCommand = new SQLiteCommand("INSERT INTO DillerTree(Id,Name,Discount,Dependence,Parent_id,Discription) VALUES (@Id, @Name, @Discount, @Dependence , @Parent_id,  @Discription)", connection))
+                            using (SQLiteCommand insertCommand = new SQLiteCommand("INSERT INTO DillerTree(Name,Discount,Dependence,Parent_id,Discription) VALUES (@Name, @Discount, @Dependence , @Parent_id,  @Discription)", connection))
                             {
-                                insertCommand.Parameters.AddWithValue("@Id", el.Id);
-                                insertCommand.Parameters.AddWithValue("@Name", el.Name);
-                                insertCommand.Parameters.AddWithValue("@Discount", el.Discount);
-                                insertCommand.Parameters.AddWithValue("@Dependence", el.Dependence);
-                                insertCommand.Parameters.AddWithValue("@Parent_id", el.Parent_id);
-                                insertCommand.Parameters.AddWithValue("@Discription", el.Discription);
-                                insertCommand.ExecuteNonQuery();
+                            
+                                if (!(el.Parent_id == 0)) {
+                                
+                                    //insertCommand.Parameters.AddWithValue("@Id", el.Id);
+                                    insertCommand.Parameters.AddWithValue("@Name", el.Name);
+                                    insertCommand.Parameters.AddWithValue("@Discount", el.Discount);
+                                    insertCommand.Parameters.AddWithValue("@Dependence", el.Dependence);
+                                    insertCommand.Parameters.AddWithValue("@Parent_id", el.Parent_id);
+                                    insertCommand.Parameters.AddWithValue("@Discription", el.Discription);
+                                    insertCommand.ExecuteNonQuery();
+
+                                }
+                                else {
+                                    //insertCommand.Parameters.AddWithValue("@Id", el.Id);
+                                    insertCommand.Parameters.AddWithValue("@Name", el.Name);
+                                    insertCommand.Parameters.AddWithValue("@Discount", el.Discount);
+                                    insertCommand.Parameters.AddWithValue("@Dependence", el.Dependence);
+                                    insertCommand.Parameters.AddWithValue("@Parent_id", DBNull.Value);
+                                    insertCommand.Parameters.AddWithValue("@Discription", el.Discription);
+                                    insertCommand.ExecuteNonQuery();
+                                }
                             }
                         }
 
@@ -736,15 +767,12 @@ namespace lorena_task
                     {
                         while (reader.Read())
                         {
-                            //Console.WriteLine($"   Id:{reader["Id"]} , Name:{reader["Name"]},  Value:{reader["Value"]}");
-
-
                             have_read_dB_Nodes.Add(new DB_Node(
                                                        Convert.ToInt16(reader["Id"]),
                                                        Convert.ToString(reader["Name"]),
                                                        Convert.ToInt16(reader["Discount"]),
                                                        Convert.ToBoolean(reader["Dependence"]),
-                                                       Convert.ToInt16(reader["Parent_id"]),
+                                                       (reader["Parent_id"] == DBNull.Value ? default(int) : Convert.ToInt16(reader["Parent_id"]) ),
                                                        Convert.ToString(reader["Discription"])));
                         }
                     }

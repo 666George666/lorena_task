@@ -202,18 +202,30 @@ namespace lorena_task
         private void sataButton3_Click(object sender, EventArgs e) {
             //добавить салон
 
-            //вызвать диалоговое окно мастера добавления с формой для заполнения
 
-            Form2 fom2 = new Form2();
-            
-            //fom2.ShowDialog();
 
-            //fom2.GetNameLine();
-            //fom2.GetDisripLine();
-            //fom2.
+            // 1просмотреть все элементы в (представлении либо в БД? и сформировать список имен?)
+            //формируем список имен
 
+            //ищем имена элементов среди считанных из БД п
+            List<string> lst = new List<string>();
+
+            foreach (DB_Node el in have_read_Nodes)
+                lst.Add(el.Name);
+
+
+            // 1 вызвать диалоговое окно мастера добавления с формой для заполнения
             // задаваемые параметры  имя  - скидка - зависимость  - описание
             // для указания зависимости вывести список имен узлов дерева которые уже есть в БД
+
+            Form2 fom2 = new Form2(lst);
+            fom2.ShowDialog();
+
+            fom2.GetNameLine();
+            fom2.GetDisripLine();
+            fom2.GetDiscLine();
+            fom2.GetDepLine();
+
 
             //добавить нвоый элемент в БД в необходимое место
 
@@ -250,6 +262,17 @@ namespace lorena_task
                 //удаление узла
                 // првоерить какой элемент выделен и запомнить его имя
                 string selectedNode = this.treeView2.SelectedNode.Name;
+
+                int selectedNodeId = 0;
+                //определить какой id
+                foreach (DB_Node el in have_read_Nodes)
+                    if (selectedNode == el.Name)
+                    {
+                        selectedNodeId = el.Id;
+                        break;
+                    }
+
+
                 //если листовой то просто удалить (из представления)
                 this.treeView2.SelectedNode.Remove();
                 //если корневой то удалить все (из представления удаляется автоматически) с предупреждающим диалоговым окном
@@ -261,13 +284,21 @@ namespace lorena_task
                 {
                     connection.Open();
 
-                    string sqlQuery = "DELETE FROM DillerTree WHERE Name = @" + selectedNode;
+                    //#############предаврительная натсрйока на возможность каскадного удаления КАЖДЫЙ РАЗ НУЖНА ПРИ ОТКРЫТИИ СОЕДИНЕНИЯ!!!!
+                    using (SQLiteCommand command = new SQLiteCommand("PRAGMA foreign_keys = ON;", connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                    string sqlQuery = "BEGIN TRANSACTION; DELETE FROM DillerTree WHERE Id = @selectedNodeId ;COMMIT;";
 
                     using (SQLiteCommand selectCommand = new SQLiteCommand(sqlQuery, connection))
                     {
-                        selectCommand.Parameters.AddWithValue("@"+ selectedNode, selectedNode);
-                        selectCommand.ExecuteNonQuery();
+                        selectCommand.Parameters.AddWithValue("@selectedNodeId", selectedNodeId);
+                        
+                        int affectedRows = selectCommand.ExecuteNonQuery(); Console.WriteLine($"{affectedRows} строк было удалено");
                     }
+                    connection.Close();
                 }
 
 

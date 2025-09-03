@@ -34,10 +34,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.add_name_line = new System.Windows.Forms.TextBox();
             this.add_disc_line = new System.Windows.Forms.TextBox();
-            this.add_dep_line = new System.Windows.Forms.TextBox();
             this.add_discrip_line = new System.Windows.Forms.TextBox();
             this.sataButton1 = new FrameworkTest.SATAButton();
             this.sataButton2 = new FrameworkTest.SATAButton();
+            this.add_dep_line = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // label1
@@ -81,28 +81,21 @@
             // 
             // add_name_line
             // 
-            this.add_name_line.Location = new System.Drawing.Point(10, 26);
+            this.add_name_line.Location = new System.Drawing.Point(8, 31);
             this.add_name_line.Name = "add_name_line";
             this.add_name_line.Size = new System.Drawing.Size(100, 20);
             this.add_name_line.TabIndex = 2;
             // 
             // add_disc_line
             // 
-            this.add_disc_line.Location = new System.Drawing.Point(116, 26);
+            this.add_disc_line.Location = new System.Drawing.Point(114, 31);
             this.add_disc_line.Name = "add_disc_line";
             this.add_disc_line.Size = new System.Drawing.Size(100, 20);
             this.add_disc_line.TabIndex = 2;
             // 
-            // add_dep_line
-            // 
-            this.add_dep_line.Location = new System.Drawing.Point(222, 26);
-            this.add_dep_line.Name = "add_dep_line";
-            this.add_dep_line.Size = new System.Drawing.Size(100, 20);
-            this.add_dep_line.TabIndex = 2;
-            // 
             // add_discrip_line
             // 
-            this.add_discrip_line.Location = new System.Drawing.Point(328, 26);
+            this.add_discrip_line.Location = new System.Drawing.Point(326, 31);
             this.add_discrip_line.Name = "add_discrip_line";
             this.add_discrip_line.Size = new System.Drawing.Size(100, 20);
             this.add_discrip_line.TabIndex = 2;
@@ -128,7 +121,7 @@
             this.sataButton1.ImageTint = System.Drawing.Color.White;
             this.sataButton1.IsToggleButton = false;
             this.sataButton1.IsToggled = false;
-            this.sataButton1.Location = new System.Drawing.Point(232, 74);
+            this.sataButton1.Location = new System.Drawing.Point(222, 74);
             this.sataButton1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.sataButton1.Name = "sataButton1";
             this.sataButton1.NormalBackground = System.Drawing.Color.DodgerBlue;
@@ -166,7 +159,7 @@
             this.sataButton2.ImageTint = System.Drawing.Color.White;
             this.sataButton2.IsToggleButton = false;
             this.sataButton2.IsToggled = false;
-            this.sataButton2.Location = new System.Drawing.Point(328, 74);
+            this.sataButton2.Location = new System.Drawing.Point(338, 74);
             this.sataButton2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.sataButton2.Name = "sataButton2";
             this.sataButton2.NormalBackground = System.Drawing.Color.DodgerBlue;
@@ -184,16 +177,24 @@
             this.sataButton2.TextOffset = new System.Drawing.Point(0, 0);
             this.sataButton2.Click += new System.EventHandler(this.sataButton2_Click);
             // 
+            // add_dep_line
+            // 
+            this.add_dep_line.FormattingEnabled = true;
+            this.add_dep_line.Location = new System.Drawing.Point(220, 26);
+            this.add_dep_line.Name = "add_dep_line";
+            this.add_dep_line.Size = new System.Drawing.Size(100, 30);
+            this.add_dep_line.TabIndex = 5;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SlateGray;
             this.ClientSize = new System.Drawing.Size(442, 116);
+            this.Controls.Add(this.add_dep_line);
             this.Controls.Add(this.sataButton2);
             this.Controls.Add(this.sataButton1);
             this.Controls.Add(this.add_discrip_line);
-            this.Controls.Add(this.add_dep_line);
             this.Controls.Add(this.add_disc_line);
             this.Controls.Add(this.add_name_line);
             this.Controls.Add(this.label4);
@@ -217,9 +218,9 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox add_name_line;
         private System.Windows.Forms.TextBox add_disc_line;
-        private System.Windows.Forms.TextBox add_dep_line;
         private System.Windows.Forms.TextBox add_discrip_line;
         private FrameworkTest.SATAButton sataButton1;
         private FrameworkTest.SATAButton sataButton2;
+        private System.Windows.Forms.ListBox add_dep_line;
     }
 }
