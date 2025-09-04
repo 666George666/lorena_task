@@ -27,16 +27,20 @@ namespace lorena_task
             InitTreeView();
         }
 
-        private decimal CalculateResult(decimal price, decimal discount, decimal discount_parent) {
+        private decimal CalculateResult(decimal price, decimal discount, decimal discount_parent)
+        {
             return price - (price * ((discount + discount_parent) / 100));
         }
 
-        private decimal CalculateDiscountPatent(DB_Node node) {
+        private decimal CalculateDiscountPatent(DB_Node node)
+        {
             //рекурсивный метод расчета скидки предков с учетом всех предков в дереве вплоть до корня
             decimal sum_discount_parent = 0;
-            if (node.Dependence) {
+            if (node.Dependence)
+            {
                 foreach (DB_Node el in have_read_Nodes)
-                    if (node.Parent_id == el.Id){
+                    if (node.Parent_id == el.Id)
+                    {
                         sum_discount_parent += el.Discount;
                         return CalculateDiscountPatent(el) + sum_discount_parent;
                     }
@@ -47,13 +51,15 @@ namespace lorena_task
 
 
 
-        private List<System.Windows.Forms.TreeNode> GenTreeNodeList() {
+        private List<System.Windows.Forms.TreeNode> GenTreeNodeList()
+        {
 
-            List<System.Windows.Forms.TreeNode> lst = new List<TreeNode> ();
+            List<System.Windows.Forms.TreeNode> lst = new List<TreeNode>();
 
-            foreach (DB_Node el in have_read_Nodes) {
+            foreach (DB_Node el in have_read_Nodes)
+            {
                 if (!el.Dependence)
-                    lst.Add( new System.Windows.Forms.TreeNode(     ) );
+                    lst.Add(new System.Windows.Forms.TreeNode());
 
 
             }
@@ -90,7 +96,7 @@ namespace lorena_task
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
 
-           // this.dataGridView1.Rows.Clear();
+            // this.dataGridView1.Rows.Clear();
 
             //выделяем подстроку с именем салона
             string diller_name = Convert.ToString(Regex.Match(treeView2.SelectedNode.Text, @"^([\w\-]+)"));
@@ -108,26 +114,29 @@ namespace lorena_task
             this.textBox_name_discount.Text = node.Discount.ToString();
             this.textBox_dependence.Text = dep(node.Dependence);
             this.textBox_discription.Text = node.Discription;
-           // this.dataGridView1.Rows.Add(node.Name, node.Discount, dep(node.Dependence) , node.Discription);
+            // this.dataGridView1.Rows.Add(node.Name, node.Discount, dep(node.Dependence) , node.Discription);
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             char ch = e.KeyChar;
-            if (!Char.IsDigit(ch) && ch != 8) { 
+            if (!Char.IsDigit(ch) && ch != 8)
+            {
                 e.Handled = true;
             }
         }
 
         //ИНТЕРЙЕС ДЛЯ ТЕСТОВ
         //Установка цены в поле
-        public void SetPrice(decimal price) { 
+        public void SetPrice(decimal price)
+        {
             textBox1.Text = price.ToString();
         }
         //выделить элемент в дереве
-        public void SelectNode(string name) {
+        public void SelectNode(string name)
+        {
             //заглушка метода выбора работающая на одних исходных данных!!!
-            if(name == "Амелия")
+            if (name == "Амелия")
                 treeView2.SelectedNode = treeView2.Nodes[0].Nodes[0];
             if (name == "Тест1")
                 treeView2.SelectedNode = treeView2.Nodes[0].Nodes[0].Nodes[0];
@@ -139,7 +148,8 @@ namespace lorena_task
                 treeView2.SelectedNode = treeView2.Nodes[0];
         }
         //расчитать по формуле
-        public decimal Calculate() {
+        public decimal Calculate()
+        {
 
             decimal price = Convert.ToDecimal(textBox1.Text);
             //выделяем подстроку с именем салона
@@ -187,11 +197,13 @@ namespace lorena_task
                     //добавляем элемент в таблицу истории
                     this.dataGridView2.Rows.Add(diller_name, price, node.Discount, discount_parent, result);
                 }
-                else {
+                else
+                {
                     MessageBox.Show("Выберете салон");
                 }
             }
-            else {
+            else
+            {
 
                 MessageBox.Show("Введите цену");
 
@@ -199,10 +211,9 @@ namespace lorena_task
         }
 
 
-        private void sataButton3_Click(object sender, EventArgs e) {
+        private void sataButton3_Click(object sender, EventArgs e)
+        {
             //добавить салон
-
-
 
             // 1просмотреть все элементы в (представлении либо в БД? и сформировать список имен?)
             //формируем список имен
@@ -213,74 +224,39 @@ namespace lorena_task
             foreach (DB_Node el in have_read_Nodes)
                 lst.Add(el.Name);
 
-
             // 1 вызвать диалоговое окно мастера добавления с формой для заполнения
             // задаваемые параметры  имя  - скидка - зависимость  - описание
             // для указания зависимости вывести список имен узлов дерева которые уже есть в БД
 
             Form2 fom2 = new Form2(lst);
-            fom2.ShowDialog();
 
-            fom2.GetNameLine();
-            fom2.GetDisripLine();
-            fom2.GetDiscLine();
-            fom2.GetDepLine();
+            DialogResult result = fom2.ShowDialog();
 
+            if (result == DialogResult.Yes)
+            {
 
-            //добавить нвоый элемент в БД в необходимое место
-
-            //3 - СОЗДАНИЕ И ОТКРЫТИЕ БД
-            //using (connection = new SQLiteConnection($"Data Source = lorena_data.db;Version = 3"))
-            //{
-            //    connection.Open();
-
-            //    using (SQLiteCommand insertCommand = new SQLiteCommand("INSERT INTO DillerTree(Id,Name,Discount,Dependence,Parent_id,Discription) VALUES (@Id, @Name, @Discount, @Dependence , @Parent_id,  @Discription)", connection))
-            //    {
-            //            insertCommand.Parameters.AddWithValue("@Id", el.Id);
-            //            insertCommand.Parameters.AddWithValue("@Name", el.Name);
-            //            insertCommand.Parameters.AddWithValue("@Discount", el.Discount);
-            //            insertCommand.Parameters.AddWithValue("@Dependence", el.Dependence);
-            //            insertCommand.Parameters.AddWithValue("@Parent_id", el.Parent_id);
-            //            insertCommand.Parameters.AddWithValue("@Discription", el.Discription);
-            //            insertCommand.ExecuteNonQuery();
-            //    }
-            //}
-
-
-
-            // отобразить БД 
-            // найти в дереве элемент по выбраному имени и добавтиь к нему дочерний узел
-
-        }
-
-        private void sataButton4_Click(object sender, EventArgs e)
-        {
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult res = MessageBox.Show("ВЫ действительно хотите удалить выбраный салон и все подсалоны при их наличии?", "Предупреждение", buttons);
-         
-            if (res == DialogResult.Yes) {
-                //удаление узла
-                // првоерить какой элемент выделен и запомнить его имя
-                string selectedNode = this.treeView2.SelectedNode.Name;
-
-                int selectedNodeId = 0;
-                //определить какой id
+                int parent_id = 0;
+                //по имени выбраной зависимости получить ее id вроде же делал уже так?
                 foreach (DB_Node el in have_read_Nodes)
-                    if (selectedNode == el.Name)
+                {
+                    if (el.Name == fom2.GetDepLine())
                     {
-                        selectedNodeId = el.Id;
+                        parent_id = el.Id;
                         break;
                     }
+                }
 
+                DB_Node insert_el = new DB_Node(0,
+                                                fom2.GetNameLine(),
+                                                int.Parse(fom2.GetDiscLine()),
+                                                fom2.GetDepLine().Length == 0 ? false : true,
+                                                parent_id,
+                                                fom2.GetDisripLine());
 
-                //если листовой то просто удалить (из представления)
-                this.treeView2.SelectedNode.Remove();
-                //если корневой то удалить все (из представления удаляется автоматически) с предупреждающим диалоговым окном
+                //добавить нвоый элемент в БД в необходимое место
 
-
-                //запрос на удаление к БД!!может он тоже сможет сам обработатться для вложенных узлов?
-                string dbPath = "lorena_data.db";//ОТКРЫВАЕМ СОЗДАННУЮ БД заного так как using вызывает деструктор
-                using (connection = new SQLiteConnection($"Data Source = {dbPath};Version = 3"))
+                // 3 -   ОТКРЫТИЕ БД
+                using (connection = new SQLiteConnection($"Data Source = lorena_data.db;Version = 3"))
                 {
                     connection.Open();
 
@@ -289,19 +265,90 @@ namespace lorena_task
                     {
                         command.ExecuteNonQuery();
                     }
-
-                    string sqlQuery = "BEGIN TRANSACTION; DELETE FROM DillerTree WHERE Id = @selectedNodeId ;COMMIT;";
-
-                    using (SQLiteCommand selectCommand = new SQLiteCommand(sqlQuery, connection))
+                    using (SQLiteCommand insertCommand = new SQLiteCommand("INSERT INTO DillerTree(Name,Discount,Dependence,Parent_id,Discription) VALUES (@Name, @Discount, @Dependence , @Parent_id,  @Discription)", connection))
                     {
-                        selectCommand.Parameters.AddWithValue("@selectedNodeId", selectedNodeId);
-                        
-                        int affectedRows = selectCommand.ExecuteNonQuery(); Console.WriteLine($"{affectedRows} строк было удалено");
+                        if (!(insert_el.Parent_id == 0))
+                        {
+                            //insertCommand.Parameters.AddWithValue("@Id", el.Id);
+                            insertCommand.Parameters.AddWithValue("@Name", insert_el.Name);
+                            insertCommand.Parameters.AddWithValue("@Discount", insert_el.Discount);
+                            insertCommand.Parameters.AddWithValue("@Dependence", insert_el.Dependence);
+                            insertCommand.Parameters.AddWithValue("@Parent_id", insert_el.Parent_id);
+                            insertCommand.Parameters.AddWithValue("@Discription", insert_el.Discription);
+                            insertCommand.ExecuteNonQuery();
+                        }
+                        else
+                        {
+                            //insertCommand.Parameters.AddWithValue("@Id", el.Id);
+                            insertCommand.Parameters.AddWithValue("@Name", insert_el.Name);
+                            insertCommand.Parameters.AddWithValue("@Discount", insert_el.Discount);
+                            insertCommand.Parameters.AddWithValue("@Dependence", insert_el.Dependence);
+                            insertCommand.Parameters.AddWithValue("@Parent_id", DBNull.Value);
+                            insertCommand.Parameters.AddWithValue("@Discription", insert_el.Discription);
+                            insertCommand.ExecuteNonQuery();
+                        }
                     }
-                    connection.Close();
                 }
 
+                this.treeView2.Nodes.Clear();//очищаем представление
+                InitTreeView();//формируем заногопредставление на основе того что теперь есть в БД
+            }
+        }
 
+        private void sataButton4_Click(object sender, EventArgs e)
+        {
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult res = MessageBox.Show("ВЫ действительно хотите удалить выбраный салон и все подсалоны при их наличии?", "Предупреждение", buttons);
+            if (res == DialogResult.Yes)
+            {
+                //удаление узла
+                // првоерить какой элемент выделен и запомнить его имя
+                try
+                {
+                    if (this.treeView2.SelectedNode == null) {
+                        MessageBox.Show("Салонов нет или он не выбран!");
+                        return;
+                        }
+
+                    string selectedNode = this.treeView2.SelectedNode.Name;
+
+                    int selectedNodeId = 0;
+                    //определить какой id
+                    foreach (DB_Node el in have_read_Nodes)
+                        if (selectedNode == el.Name)
+                        {
+                            selectedNodeId = el.Id;
+                            break;
+                        }
+                    //если листовой то просто удалить (из представления)
+                    this.treeView2.SelectedNode.Remove();
+                    //если корневой то удалить все (из представления удаляется автоматически) с предупреждающим диалоговым окном
+
+                    //запрос на удаление к БД!!может он тоже сможет сам обработатться для вложенных узлов?
+                    string dbPath = "lorena_data.db";//ОТКРЫВАЕМ СОЗДАННУЮ БД заного так как using вызывает деструктор
+                    using (connection = new SQLiteConnection($"Data Source = {dbPath};Version = 3"))
+                    {
+                        connection.Open();
+                        //#############предаврительная натсрйока на возможность каскадного удаления КАЖДЫЙ РАЗ НУЖНА ПРИ ОТКРЫТИИ СОЕДИНЕНИЯ!!!!
+                        using (SQLiteCommand command = new SQLiteCommand("PRAGMA foreign_keys = ON;", connection))
+                        {
+                            command.ExecuteNonQuery();
+                        }
+
+                        string sqlQuery = "BEGIN TRANSACTION; DELETE FROM DillerTree WHERE Id = @selectedNodeId ;COMMIT;";
+
+                        using (SQLiteCommand selectCommand = new SQLiteCommand(sqlQuery, connection))
+                        {
+                            selectCommand.Parameters.AddWithValue("@selectedNodeId", selectedNodeId);
+                            int affectedRows = selectCommand.ExecuteNonQuery(); Console.WriteLine($"{affectedRows} строк было удалено");
+                        }
+                        connection.Close();
+                    }
+                }
+                catch (System.NullReferenceException ex)
+                {
+                    this.Close();
+                }
 
             }
         }
