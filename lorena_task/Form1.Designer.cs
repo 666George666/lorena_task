@@ -71,13 +71,13 @@ namespace lorena_task
             this.sataButton2 = new FrameworkTest.SATAButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.sataPictureBox1 = new SATAUiFramework.Controls.SATAPictureBox();
+            this.sataButton5 = new FrameworkTest.SATAButton();
             this.sataButton4 = new FrameworkTest.SATAButton();
             this.sataButton3 = new FrameworkTest.SATAButton();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.treeView2 = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.sataButton5 = new FrameworkTest.SATAButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -287,6 +287,7 @@ namespace lorena_task
             // 
             // textBox_discription
             // 
+            this.textBox_discription.Enabled = false;
             this.textBox_discription.Location = new System.Drawing.Point(328, 62);
             this.textBox_discription.Name = "textBox_discription";
             this.textBox_discription.Size = new System.Drawing.Size(423, 20);
@@ -294,6 +295,7 @@ namespace lorena_task
             // 
             // textBox_dependence
             // 
+            this.textBox_dependence.Enabled = false;
             this.textBox_dependence.Location = new System.Drawing.Point(219, 62);
             this.textBox_dependence.Name = "textBox_dependence";
             this.textBox_dependence.Size = new System.Drawing.Size(100, 20);
@@ -301,6 +303,7 @@ namespace lorena_task
             // 
             // textBox_name_discount
             // 
+            this.textBox_name_discount.Enabled = false;
             this.textBox_name_discount.Location = new System.Drawing.Point(113, 62);
             this.textBox_name_discount.Name = "textBox_name_discount";
             this.textBox_name_discount.Size = new System.Drawing.Size(100, 20);
@@ -308,6 +311,7 @@ namespace lorena_task
             // 
             // textBox_name
             // 
+            this.textBox_name.Enabled = false;
             this.textBox_name.Location = new System.Drawing.Point(10, 62);
             this.textBox_name.Name = "textBox_name";
             this.textBox_name.Size = new System.Drawing.Size(100, 20);
@@ -431,6 +435,45 @@ namespace lorena_task
             this.sataPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.sataPictureBox1.TabIndex = 7;
             this.sataPictureBox1.TabStop = false;
+            // 
+            // sataButton5
+            // 
+            this.sataButton5.ButtonText = "Очистить историю";
+            this.sataButton5.CheckedBackground = System.Drawing.Color.DodgerBlue;
+            this.sataButton5.CheckedForeColor = System.Drawing.Color.White;
+            this.sataButton5.CheckedImageTint = System.Drawing.Color.White;
+            this.sataButton5.CheckedOutline = System.Drawing.Color.DodgerBlue;
+            this.sataButton5.CustomDialogResult = System.Windows.Forms.DialogResult.None;
+            this.sataButton5.Font = new System.Drawing.Font("GOST type B", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.sataButton5.HoverBackground = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.sataButton5.HoverForeColor = System.Drawing.Color.White;
+            this.sataButton5.HoverImage = null;
+            this.sataButton5.HoverImageTint = System.Drawing.Color.White;
+            this.sataButton5.HoverOutline = System.Drawing.Color.Empty;
+            this.sataButton5.Image = global::lorena_task.Properties.Resources.icons8_close_50;
+            this.sataButton5.ImageAutoCenter = true;
+            this.sataButton5.ImageExpand = new System.Drawing.Point(0, 0);
+            this.sataButton5.ImageOffset = new System.Drawing.Point(0, 0);
+            this.sataButton5.ImageTint = System.Drawing.Color.White;
+            this.sataButton5.IsToggleButton = false;
+            this.sataButton5.IsToggled = false;
+            this.sataButton5.Location = new System.Drawing.Point(0, 536);
+            this.sataButton5.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.sataButton5.Name = "sataButton5";
+            this.sataButton5.NormalBackground = System.Drawing.Color.DodgerBlue;
+            this.sataButton5.NormalForeColor = System.Drawing.Color.White;
+            this.sataButton5.NormalOutline = System.Drawing.Color.Empty;
+            this.sataButton5.OutlineThickness = 2F;
+            this.sataButton5.PressedBackground = System.Drawing.Color.RoyalBlue;
+            this.sataButton5.PressedForeColor = System.Drawing.Color.White;
+            this.sataButton5.PressedImageTint = System.Drawing.Color.White;
+            this.sataButton5.PressedOutline = System.Drawing.Color.Empty;
+            this.sataButton5.Rounding = new System.Windows.Forms.Padding(5);
+            this.sataButton5.Size = new System.Drawing.Size(206, 46);
+            this.sataButton5.TabIndex = 6;
+            this.sataButton5.TextAutoCenter = true;
+            this.sataButton5.TextOffset = new System.Drawing.Point(0, 0);
+            this.sataButton5.Click += new System.EventHandler(this.sataButton5_Click);
             // 
             // sataButton4
             // 
@@ -557,45 +600,6 @@ namespace lorena_task
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "citycons_building-512_9481.png");
             this.imageList1.Images.SetKeyName(1, "lorena1.jpg");
-            // 
-            // sataButton5
-            // 
-            this.sataButton5.ButtonText = "Очистить историю";
-            this.sataButton5.CheckedBackground = System.Drawing.Color.DodgerBlue;
-            this.sataButton5.CheckedForeColor = System.Drawing.Color.White;
-            this.sataButton5.CheckedImageTint = System.Drawing.Color.White;
-            this.sataButton5.CheckedOutline = System.Drawing.Color.DodgerBlue;
-            this.sataButton5.CustomDialogResult = System.Windows.Forms.DialogResult.None;
-            this.sataButton5.Font = new System.Drawing.Font("GOST type B", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.sataButton5.HoverBackground = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.sataButton5.HoverForeColor = System.Drawing.Color.White;
-            this.sataButton5.HoverImage = null;
-            this.sataButton5.HoverImageTint = System.Drawing.Color.White;
-            this.sataButton5.HoverOutline = System.Drawing.Color.Empty;
-            this.sataButton5.Image = global::lorena_task.Properties.Resources.icons8_close_50;
-            this.sataButton5.ImageAutoCenter = true;
-            this.sataButton5.ImageExpand = new System.Drawing.Point(0, 0);
-            this.sataButton5.ImageOffset = new System.Drawing.Point(0, 0);
-            this.sataButton5.ImageTint = System.Drawing.Color.White;
-            this.sataButton5.IsToggleButton = false;
-            this.sataButton5.IsToggled = false;
-            this.sataButton5.Location = new System.Drawing.Point(0, 536);
-            this.sataButton5.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.sataButton5.Name = "sataButton5";
-            this.sataButton5.NormalBackground = System.Drawing.Color.DodgerBlue;
-            this.sataButton5.NormalForeColor = System.Drawing.Color.White;
-            this.sataButton5.NormalOutline = System.Drawing.Color.Empty;
-            this.sataButton5.OutlineThickness = 2F;
-            this.sataButton5.PressedBackground = System.Drawing.Color.RoyalBlue;
-            this.sataButton5.PressedForeColor = System.Drawing.Color.White;
-            this.sataButton5.PressedImageTint = System.Drawing.Color.White;
-            this.sataButton5.PressedOutline = System.Drawing.Color.Empty;
-            this.sataButton5.Rounding = new System.Windows.Forms.Padding(5);
-            this.sataButton5.Size = new System.Drawing.Size(206, 46);
-            this.sataButton5.TabIndex = 6;
-            this.sataButton5.TextAutoCenter = true;
-            this.sataButton5.TextOffset = new System.Drawing.Point(0, 0);
-            this.sataButton5.Click += new System.EventHandler(this.sataButton5_Click);
             // 
             // Form1
             // 
