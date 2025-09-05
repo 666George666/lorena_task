@@ -54,9 +54,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(113, 10);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 13);
+            this.label2.Size = new System.Drawing.Size(58, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Скидка";
+            this.label2.Text = "Скидка, %";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
@@ -92,6 +92,7 @@
             this.add_disc_line.Name = "add_disc_line";
             this.add_disc_line.Size = new System.Drawing.Size(100, 20);
             this.add_disc_line.TabIndex = 2;
+            this.add_disc_line.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.add_disc_line_KeyPress);
             // 
             // add_discrip_line
             // 
@@ -156,6 +157,8 @@
             this.AddButton.TabIndex = 6;
             this.AddButton.Text = "Добавить";
             this.AddButton.UseVisualStyleBackColor = true;
+            this.AddButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AddButton_MouseClick);
+            this.AddButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.AddButton_MouseDown);
             // 
             // Form2
             // 
