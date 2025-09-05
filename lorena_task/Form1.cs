@@ -353,6 +353,12 @@ namespace lorena_task
             }
         }
 
+
+        private void sataButton5_Click(object sender, EventArgs e)
+        {
+            this.dataGridView2.Rows.Clear();
+        }
+
         private void label3_Click(object sender, EventArgs e)
         {
 
