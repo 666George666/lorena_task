@@ -49,8 +49,6 @@ namespace lorena_task
             return 0;
         }
 
-
-
         private List<System.Windows.Forms.TreeNode> GenTreeNodeList()
         {
 
@@ -65,7 +63,6 @@ namespace lorena_task
             }
             return lst;
         }
-
 
         private void button1_MouseClick(object sender, MouseEventArgs e)
         {
@@ -204,9 +201,7 @@ namespace lorena_task
             }
             else
             {
-
                 MessageBox.Show("Введите цену");
-
             }
         }
 
